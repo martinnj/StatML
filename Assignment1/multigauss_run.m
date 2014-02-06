@@ -11,6 +11,12 @@ end
 
 X = points(1,:);
 Y = points(2,:);
-plot(X,Y,'x');
+meanX = mean(X);
+meanY = mean(Y);
+plot(X,Y,'x',meanX,meanY,'o',mu(1),mu(2),'o');
 title('Multivariate Gaussian Distribution for N=100','FontSize',15);
 grid on;
+legend('Multivariate Gaussian Distribution','Mean X/Y','Mu');
+[meanX,meanY]
+mu'
+norm([meanX,meanY] - mu')

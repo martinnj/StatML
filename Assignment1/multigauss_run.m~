@@ -1,9 +1,0 @@
-mu = [1,2]';
-Sigma = [0.3,0.2;0.2,0.2];
-L = chol(Sigma,'lower');
-N=100
-z=zeros(2, N);
-for j=1:N,
-    z = randn(1,2);
-    multigauss( mu, L, z )
-end
