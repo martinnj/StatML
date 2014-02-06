@@ -1,0 +1,8 @@
+*.aux
+*.swp
+*.log
+*.fls
+*.fdb*
+*.out
+*.toc
+
