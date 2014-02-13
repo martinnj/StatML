@@ -47,5 +47,5 @@ plot(X, Y, 'x', mu(1), mu(2), 'o');
 plot(ev1x, ev1y,'-', 'Color', 'red');
 plot(ev2x, ev2y,'-', 'Color', 'green');
 hold off;
-title('Eigenvectors plotted onto Gaussian distribution, centered at mu.');
-legend('Multivariate Gaussian distribution', 'Distribution mean.', 'Eigen vector 1', 'Eigen vector 2');
+title('Eigenvectors plotted onto Gaussian distribution, centered at mu.','FontSize',15);
+legend('Multivariate Gaussian distribution', 'Distribution mean', 'Eigen vector 1', 'Eigen vector 2');
