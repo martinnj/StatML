@@ -13,13 +13,15 @@ X = points(1,:);
 Y = points(2,:);
 
 plot(X, Y, 'x');
-title('Multivariate Gaussian distribution for N=100', 'FontSize', 15);
+title('Multivariate Gaussian distribution for N=1000', 'FontSize', 15);
 
 %%%% I.2.3
 meanX = mean(X);
 meanY = mean(Y);
 plot(X, Y, 'x', meanX, meanY, 'o', mu(1), mu(2), 'o');
-title('Multivariate Gaussian distribution for N=100 with sample mean and distribution mean', 'FontSize', 15);
+axis equal;
+grid on;
+title('Multivariate Gaussian distribution for N=1000 with sample mean and distribution mean', 'FontSize', 15);
 legend('Multivariate Gaussian Distribution', 'Sample mean', 'Distribution Mean');
 
 %%%%% I.2.4
@@ -47,5 +49,67 @@ plot(X, Y, 'x', mu(1), mu(2), 'o');
 plot(ev1x, ev1y,'-', 'Color', 'red');
 plot(ev2x, ev2y,'-', 'Color', 'green');
 hold off;
+axis equal;
+grid on;
 title('Eigenvectors plotted onto Gaussian distribution, centered at mu.','FontSize',15);
 legend('Multivariate Gaussian distribution', 'Distribution mean', 'Eigen vector 1', 'Eigen vector 2');
+
+%%%% Rotating the covariance ^_^
+figure;
+hold on;
+Sigma30 = rotateCov(sigmaML, 30);
+Sigma60 = rotateCov(sigmaML, 60);
+Sigma90 = rotateCov(sigmaML, 90);
+
+%%%% Copy pasted plotting code
+%%%% TODO: Replace with a function. Would be prettier.
+L = chol(Sigma30,'lower');
+points=zeros(2,N);
+for j=1:N,
+    z = randn(2,1);
+    points(:, j) = multigauss( mu, L, z );
+end
+X = points(1,:);
+Y = points(2,:);
+plot(X, Y, 'x','Color','red');
+
+L = chol(Sigma60,'lower');
+points=zeros(2,N);
+for j=1:N,
+    z = randn(2,1);
+    points(:, j) = multigauss( mu, L, z );
+end
+X = points(1,:);
+Y = points(2,:);
+plot(X, Y, 'x','Color','cyan');
+
+L = chol(Sigma90,'lower');
+points=zeros(2,N);
+for j=1:N,
+    z = randn(2,1);
+    points(:, j) = multigauss( mu, L, z );
+end
+X = points(1,:);
+Y = points(2,:);
+plot(X, Y, 'x','Color','magenta');
+
+%%%% More stuff
+[eigenVectors2,eigenValue2] = eig(sigmaML);
+v = eigenVectors2(:,1);
+angleOfX = -atand(v(1)/v(2));
+SigmaX = rotateCov(sigmaML, angleOfX);
+
+L = chol(SigmaX,'lower');
+points=zeros(2,N);
+for j=1:N,
+    z = randn(2,1);
+    points(:, j) = multigauss( mu, L, z );
+end
+X = points(1,:);
+Y = points(2,:);
+plot(X, Y, 'x','Color','black');
+axis equal;
+grid on;
+title('Rotated Multivariate Gaussian distribution for N=1000', 'FontSize', 15);
+legend('Sigma rotated 30 degrees','Sigma rotated 60 degrees','Sigma rotated 90 degrees','Sigma rotated to match X-axis')
+hold off;
