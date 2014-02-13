@@ -26,13 +26,13 @@ legend('Multivariate Gaussian Distribution', 'Sample mean', 'Distribution Mean')
 
 %%%%% I.2.4
 %%%%% SigmaML = Maximum likelihood
-sigmaML = zeros(2,2);
+SigmaML = zeros(2,2);
 for i=1:N,
-    sigmaML = sigmaML + (points(:,i) - mu) * (points(:,i) - mu)';
+    SigmaML = SigmaML + (points(:,i) - mu) * (points(:,i) - mu)';
 end
-sigmaML = sigmaML ./ N;
+SigmaML = SigmaML ./ N;
 
-[eigenVectors,eigenValues] = eig(sigmaML);
+[eigenVectors,eigenValues] = eig(SigmaML);
 
 %%%%% e1 and e2 = Scaled and translated eigenvectors, see assignment.
 e1 = mu + sqrt(eigenValues(1,1))*eigenVectors(:,1);
@@ -57,9 +57,9 @@ legend('Multivariate Gaussian distribution', 'Distribution mean', 'Eigen vector 
 %%%% Rotating the covariance ^_^
 figure;
 hold on;
-Sigma30 = rotateCov(sigmaML, 30);
-Sigma60 = rotateCov(sigmaML, 60);
-Sigma90 = rotateCov(sigmaML, 90);
+Sigma30 = rotateCov(SigmaML, 30);
+Sigma60 = rotateCov(SigmaML, 60);
+Sigma90 = rotateCov(SigmaML, 90);
 
 %%%% Copy pasted plotting code
 %%%% TODO: Replace with a function. Would be prettier.
@@ -94,10 +94,10 @@ Y = points(2,:);
 plot(X, Y, 'x','Color','magenta');
 
 %%%% More stuff
-[eigenVectors2,eigenValue2] = eig(sigmaML);
+[eigenVectors2,eigenValue2] = eig(SigmaML);
 v = eigenVectors2(:,1);
 angleOfX = -atand(v(1)/v(2));
-SigmaX = rotateCov(sigmaML, angleOfX);
+SigmaX = rotateCov(SigmaML, angleOfX);
 
 L = chol(SigmaX,'lower');
 points=zeros(2,N);
