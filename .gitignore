@@ -1,4 +1,5 @@
 *.aux
+*.m~
 *.swp
 *.log
 *.fls

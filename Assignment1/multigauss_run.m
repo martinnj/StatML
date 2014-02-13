@@ -22,7 +22,6 @@ plot(X, Y, 'x', meanX, meanY, 'o', mu(1), mu(2), 'o');
 title('Multivariate Gaussian distribution for N=100 with sample mean and distribution mean', 'FontSize', 15);
 legend('Multivariate Gaussian Distribution', 'Sample mean', 'Distribution Mean');
 
-
 %%%%% I.2.4
 %%%%% SigmaML = Maximum likelihood
 sigmaML = zeros(2,2);
@@ -34,20 +33,19 @@ sigmaML = sigmaML ./ N;
 [eigenVectors,eigenValues] = eig(sigmaML);
 
 %%%%% e1 and e2 = Scaled and translated eigenvectors, see assignment.
-e1 = mu + sqrt(eigenValues(1))*eigenVectors(:,1);
-e2 = mu + sqrt(eigenValues(2))*eigenVectors(:,2);
+e1 = mu + sqrt(eigenValues(1,1))*eigenVectors(:,1);
+e2 = mu + sqrt(eigenValues(2,2))*eigenVectors(:,2);
 
+% Figure showing eigenvectors plotted onto the gaussian distribution.
 figure;
-tx = [mu(1); e1(1)];
-ty = [mu(2); e1(2)];
-plot(tx, ty);
+ev1x = [mu(1); e1(1)];
+ev1y = [mu(2); e1(2)];
+ev2x = [mu(1); e2(1)];
+ev2y = [mu(2); e2(2)];
 hold on;
-tx_1 = [mu(1); e2(1)];
-ty_1 = [mu(2); e2(2)];
-plot(tx_1, ty_1);
-plot(X,Y,'o');
+plot(ev1x, ev1y, 'Color', 'red');
+plot(ev2x, ev2y, 'Color', 'green');
+plot(X, Y, 'x', mu(1), mu(2), 'o');
 hold off;
-title('TEST');
-%plot(X, Y, 'x', meanX, meanY, 'o', mu(1), mu(2), 'o', );
-%title('Multivariate Gaussian distribution for N=100 with sample mean and distribution mean', 'FontSize', 15);
-%legend('Multivariate Gaussian Distribution', 'Sample mean', 'Distribution Mean');
+title('Eigenvectors plotted onto Gaussian distribution, centered at mu.');
+legend('Eigen vector 1', 'Eigen vector 2', 'Multivariate Gaussian distribution');
