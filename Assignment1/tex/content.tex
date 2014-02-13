@@ -87,21 +87,21 @@ Therefore, differentiating for x we get:
 	\left ( f \cdot g \right )' (x) &= 1e^x + xe^x
 \end{align*}
 
+\pagebreak
 \section*{I.2.1}
 The plots with gaussian distributions for (sigma, mu) pairs (-1,1), (0,2) and (2,3) can be
 seen in Figure~\ref{fig:I.2.1}. The code for generating the plots can be found in \texttt{unigauss\_run.m}, 
 and the code for our gaussian distribution function can be found in \texttt{unigauss.m}.
 
 \begin{figure}[h!]
-	\includegraphics[width=\textwidth]{img/unigauss}
+	\includegraphics[width=0.5\textwidth]{img/unigauss}
 	\caption{Gaussian distributions plotted with different values for (sigma, mu). \label{fig:I.2.1}}
 \end{figure}
 
 \section*{I.2.2}
 Source code is available in \texttt{multigauss.m} and \texttt{multigauss\_run.m}.
-
 \begin{figure}[h!]
-	\includegraphics[width=\textwidth]{img/multigauss}
+	\includegraphics[width=0.5\textwidth]{img/multigauss}
 	\caption{100 points drawn from a 2-dimensional Multivariate gaussian distribution. \label{fig:I.2.2}}
 \end{figure}
 
@@ -120,12 +120,23 @@ from the multivariate gaussian distribution at random. If we had a number of poi
 would approach 0.
 
 \begin{figure}[h!]
-	\includegraphics[width=\textwidth]{img/multigaussmeanxy}
+	\includegraphics[width=0.5\textwidth]{img/multigaussmeanxy}
 	\caption{100 points drawn from a 2-dimensional Multivariate gaussian distribution, plotted with
-	the mean of the distribution and the value of mu. \label{fig:I.2.3}}
+	the mean of the distribution and the value of $\mu$. \label{fig:I.2.3}}
 \end{figure}
 
-\section*{I.2.3}
-
+\FloatBarrier
 \section*{I.2.4}
+The covariance matrix is full rank 2 and thus has two eigenvectors and eigenvalues. Each eigenvector represents
+a principal component (or linearly uncorrelated variable), and each eigenvalue a scalar representing the variance.
+Intuitively, the eigenvectors form a scaled and translated coordinate system centered at the mean of the multivariate
+Gaussian distribution ($\mu$). If an eigenvalue is 0, the dimensionality is reduced by one. The larger of the two
+eigenvector/value pairs represents the direction where the ellipsis is widest.
+
+\begin{figure}[h!]
+	\includegraphics[width=0.5\textwidth]{img/multigausseigen}
+	\caption{1000 points drawn from a 2-dimensional Multivariate gaussian distribution, plotted with the
+	mean of the distribution, the value of $\mu$ and the two eigenvectors centered in the distribution $\mu$. \label{fig:I.2.4.1}}
+\end{figure}
+
 
