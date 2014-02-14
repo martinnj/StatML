@@ -2,7 +2,7 @@ clear all;
 
 train = dlmread('IrisTrain2014.dt');
 test = dlmread('IrisTest2014.dt');
-KValues = [1 3 5 7 10 25];
+KValues = [1 3 5];
 
 % X = Input vectors
 trainSize = size(train);
