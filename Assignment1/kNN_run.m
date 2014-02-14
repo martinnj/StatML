@@ -29,5 +29,8 @@ for i=1:length(KValues)
    Results(2*i-1,2) = 1 - (nnz(trainY - TrainPred)) / length(trainY);
    Results(2*i,2) = 1 - (nnz(testY - TestPred)) / length(testY);
 end
-
 Results
+
+%%%% Question I.4.2 - 5-fold cross validation.
+
+
