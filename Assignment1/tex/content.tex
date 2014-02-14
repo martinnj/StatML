@@ -159,7 +159,64 @@ angle needed for this was $-37.2564^o$ in our case.
 \end{figure}
 
 \section*{I.3}
-We have $\mu$ and the covariance $\Sigma$ given by:
+We have $\mu$, $\overline{x}$ and the covariance $\Sigma$ given by:
 \begin{align}
+	\mu &= \begin{pmatrix}
+		\mu_a \\
+		\mu_b \\
+		\mu_c
+	\end{pmatrix} \\
+	\overline{x} &= \begin{pmatrix}
+		x_a \\
+		x_b \\
+		x_c
+	\end{pmatrix} \\
+	\Sigma &= \begin{bmatrix}
+		\Sigma_{aa} & \Sigma_{ab} & \Sigma_{ac} \\
+		\Sigma_{ba} & \Sigma_{bb} & \Sigma_{bc} \\
+		\Sigma_{ca} & \Sigma_{cb} & \Sigma_{cc}
+	\end{bmatrix}
+\end{align}
 
+We partition our $\mu$, $\overline{x}$ and $\Sigma$ as follows:
+\begin{align}
+	\mu &= \begin{pmatrix}
+		\mu_d \\
+		\mu_c
+	\end{pmatrix}, \text{where } \mu_d = \begin{pmatrix}\mu_a \\ \mu_b \end{pmatrix} \\
+	\overline{x} &= \begin{pmatrix}
+		x_d \\
+		x_c
+	\end{pmatrix}, \text{where } x_d = \begin{pmatrix}x_a \\ x_b \end{pmatrix} \\
+	\Sigma &= \begin{bmatrix}
+		\Sigma_{aad} & \Sigma_{abd} \\
+		\Sigma_{bad} & \Sigma_{bbd} \\
+	\end{bmatrix} \\
+	\text{where } \Sigma_{aad} &= \begin{bmatrix}
+		\Sigma_{aa} & \Sigma_{ab} \\
+		\Sigma_{ba} & \Sigma_{bb}
+	\end{bmatrix} \\
+	\text{and } \Sigma_{abd} &= \begin{bmatrix}
+		\Sigma_{ac} \\ \Sigma_{bc}
+	\end{bmatrix} \\
+	\text{and } \Sigma_{bad} &= \begin{bmatrix}
+		\Sigma_{ca} & \Sigma_{cb} 
+	\end{bmatrix} \\
+	\text{and } \Sigma_{bbd} &= \begin{bmatrix} \Sigma_{cc} \end{bmatrix}
+\end{align}
+
+We also define a partitioned precision matrix 
+(inverse of the covariance matrix), as:
+\begin{align}
+	\Lambda &\equiv \Sigma^{-1} = \begin{bmatrix}
+		\Lambda_{aa} & \Lambda_{ab} \\
+		\Lambda_{ba} & \Lambda_{bb}		
+	\end{bmatrix}
+\end{align}
+
+We wish to now discover $p(\overline{x}_d | \overline{x}_c)$, by considering
+the quadratic formin the exponent of the Gaussian distribution:
+
+\begin{align}
+	-\frac{1}{2} (x - \mu)^T \Sigma^{-1}(x - \mu)
 \end{align}
