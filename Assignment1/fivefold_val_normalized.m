@@ -13,9 +13,12 @@ testSize = testSize(2);
 trainX = train(:, 1:trainSize-1);
 testX = test(:, 1:testSize-1);
 % Normalize it!
+trainMean = mean(trainX(:))
+trainVar = var(trainX(:))
 testX = scale(trainX,testX);
 trainX = scale(trainX,trainX);
-
+testMean = mean(testX(:))
+testVar = var(testX(:))
 % y = Target classes
 trainY = train(:, 3);
 testY = test(:, 3);
