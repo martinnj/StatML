@@ -133,10 +133,33 @@ Intuitively, the eigenvectors form a scaled and translated coordinate system cen
 Gaussian distribution ($\mu$). If an eigenvalue is 0, the dimensionality is reduced by one. The larger of the two
 eigenvector/value pairs represents the direction where the ellipsis is widest.
 
+The covariance matrix we calculated can be found in Eq~\ref{eq:cov}. Figure~\ref{fig:I.2.4.1} shows a plot of the Multivariate
+gaussian distribution, plotted with the mean, $\mu$ and the two eigenvectors centered in the distribution $\mu$. Figure~\ref{fig:I.2.4.1.rot}
+shows a plot of the 3 rotated distributions along with the distribution rotated to match the largest eigenvector along the x-axis. The
+angle needed for this was $-37.2564^o$ in our case.
+
+\begin{align}
+	\Sigma_{ML} &= \frac{1}{N} \sum_{n=1}^N (x_n - \mu_{ML}) (x_n - \mu_{ML})^T \notag \\
+	&= \begin{pmatrix}
+		0.3239 & 0.2093 \\
+		0.2093 & 0.2080
+	\end{pmatrix} \label{eq:cov}
+\end{align}
+
 \begin{figure}[h!]
 	\includegraphics[width=0.5\textwidth]{img/multigausseigen}
-	\caption{1000 points drawn from a 2-dimensional Multivariate gaussian distribution, plotted with the
+	\caption{100 points drawn from a 2-dimensional Multivariate gaussian distribution, plotted with the
 	mean of the distribution, the value of $\mu$ and the two eigenvectors centered in the distribution $\mu$. \label{fig:I.2.4.1}}
 \end{figure}
 
+\begin{figure}[h!]
+	\includegraphics[width=0.5\textwidth]{img/multigaussrotate}
+	\caption{100 points drawn from a 2-dimensional Multivariate gaussian distribution, rotated at 30, 60 and 90 degrees
+	and lastly also aligned along the x-axis, all distributions in their own color. \label{fig:I.2.4.1.rot}}
+\end{figure}
 
+\section*{I.3}
+We have $\mu$ and the covariance $\Sigma$ given by:
+\begin{align}
+
+\end{align}
