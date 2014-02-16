@@ -159,27 +159,30 @@ angle needed for this was $-37.2564^o$ in our case.
 \end{figure}
 
 \section*{I.3}
-We have $\mu$, $\overline{x}$ and the covariance $\Sigma$ given by:
-\begin{align}
-	\mu &= \begin{pmatrix}
+Given:
+\begin{align*}
+	\mu = \begin{pmatrix}
 		\mu_a \\
 		\mu_b \\
 		\mu_c
-	\end{pmatrix} \\
-	\overline{x} &= \begin{pmatrix}
+	\end{pmatrix} \quad
+	x = \begin{pmatrix}
 		x_a \\
 		x_b \\
 		x_c
-	\end{pmatrix} \\
-	\Sigma &= \begin{bmatrix}
+	\end{pmatrix} \quad
+	\Sigma = \begin{bmatrix}
 		\Sigma_{aa} & \Sigma_{ab} & \Sigma_{ac} \\
 		\Sigma_{ba} & \Sigma_{bb} & \Sigma_{bc} \\
 		\Sigma_{ca} & \Sigma_{cb} & \Sigma_{cc}
 	\end{bmatrix}
-\end{align}
+\end{align*}
+We wish to discover an expression for the conditional distribution $p(x_a|x_b)$ in which
+$x_c$ has been marginalized out. We first find an expression for $p(x_a|x_b)$ and then marginalize
+out $x_c$.
 
-We partition our $\mu$, $\overline{x}$ and $\Sigma$ as follows:
-\begin{align}
+We partition $\mu$, $x$ and $\Sigma$ as follows:
+\begin{align*}
 	\mu &= \begin{pmatrix}
 		\mu_d \\
 		\mu_c
@@ -203,9 +206,9 @@ We partition our $\mu$, $\overline{x}$ and $\Sigma$ as follows:
 		\Sigma_{ca} & \Sigma_{cb} 
 	\end{bmatrix} \\
 	\text{and } \Sigma_{bbd} &= \begin{bmatrix} \Sigma_{cc} \end{bmatrix}
-\end{align}
+\end{align*}
 
-We also define a partitioned precision matrix 
+We also partition the precision matrix 
 (inverse of the covariance matrix), as:
 \begin{align}
 	\Lambda &\equiv \Sigma^{-1} = \begin{bmatrix}
@@ -213,20 +216,97 @@ We also define a partitioned precision matrix
 		\Lambda_{ba} & \Lambda_{bb}		
 	\end{bmatrix}
 \end{align}
+\textit{Note: This recasts our problem to be to find a conditional distribution
+$p(x_d|x_c)$ and then to marginalize $x_c$ out}
 
-We wish to now discover $p(\overline{x}_d | \overline{x}_c)$, by considering
-the quadratic formin the exponent of the Gaussian distribution:
+A conditional distribution can be evaluated from the joint distribution
+$p(x) = p(x_d, x_c)$ by fixing $x_c$ and normalizing. We know from \cite{book}
+that if a joint distribution $p(x_d, x_c)$ is Gaussian, then the conditional distribution
+$p(x_d|x_c)$ is also Gaussian. 
+
+We wish to find
+ $p(x_d | x_c)$, by considering the quadratic form in the exponent of the Gaussian distribution:
 
 \begin{align}
-	-\frac{1}{2} (x - \mu)^T \Sigma^{-1}(x - \mu)
+	& -\frac{1}{2} (x - \mu)^T \Sigma^{-1}(x - \mu) = \label{eq:2.70}\\
+	& -\frac{1}{2} (x_d - \mu_d)^T \Lambda_{aa} (x_d - \mu_d) \notag \\
+	& -\frac{1}{2} (x_d - \mu_d)^T \Lambda_{ab} (x_c - \mu_c) \notag \\
+	& -\frac{1}{2} (x_c - \mu_c)^T \Lambda_{ba} (x_d - \mu_d) \notag \\
+	& -\frac{1}{2} (x_c - \mu_c)^T \Lambda_{bb} (x_c - \mu_c) \notag
 \end{align}
 
+A Gaussian distribution is completely characterized by its mean and covariance, so
+we must find expressions for the mean and covariance of $p(x_d|x_c)$, by completing
+the square. We denote the mean and covariance of this distribution by $\mu_{d|c}$ and
+$\Sigma_{d|c}$ respectively. By considering the functional dependence of Eq~\ref{eq:2.70}
+on $x_d$ in which $x_c$ is regarded as a constant, we pick out all terms that are second
+order in $x_d$:
+\begin{align}
+	-\frac{1}{2} x_d^T \Lambda_{aa} x_d
+\end{align}
+From which we have that $\Sigma_{d|c} = \Lambda_{aa}^{-1}$. The terms in
+Eq~\ref{eq:2.70} which are linear in $x_d$ are $x_d^T \left \{ \Lambda_{aa}
+\mu_d - \Lambda_{a}(x_c - \mu_c) \right \}$, making use of the fact that
+$\Lambda_{ba}^T = \Lambda_{ab}$ (See \cite[p.85]{book}). The coefficient of
+$x_d$ in this expression is equal to $\Sigma_{d|c}^{-1} \mu_{d|c}$ and so:
 
+\begin{align}
+	\mu_{d|c} &= \Sigma_{d|c} \left\{ \Lambda_{aa} \mu_{d} - \Lambda_{ab}(x_c - \mu_c) \right\} \notag \\
+		  &= \mu_d - \Lambda_{aa}^{-1} \Lambda_{ab}(x_c - \mu_c) \label{eq:2.75}
+\end{align}
+
+Making use of the \textit{Schur complement} of a matrix\cite[p.87]{book}, we have that:
+\begin{align*}
+	\Lambda_{aa} &= (\Sigma_{aa} - \Sigma_{ab} \Sigma_{bb}^{-1} \Sigma_{ba})^{-1} \\
+	\Lambda_{ab} &= -(\Sigma_{aa} - \Sigma_{ab} \Sigma_{bb}^{-1} \Sigma_{ba})^{-1} \Sigma_{ab} \Sigma_{bb}^{-1}
+\end{align*}
+
+From these we now have the following for the mean and covariance of $p(x_d|x_c)$:
+\begin{align}
+	\mu_{d|c} &= \mu_d + \Sigma_{ab} \Sigma_{bb}^{-1} (x_c - \mu_c) \\
+	\Sigma_{d|c} &= \Sigma_{aa} - \Sigma_{ab} \Sigma_{bb}^{-1} \Sigma_{ba}
+\end{align}
+
+We must now find the margina distribution given by
+\begin{align*}
+	p(x_d) = \int p(x_d, x_c) \ dx_c
+\end{align*}
+
+We complete the square to integrate out $x_c$. The terms involving $x_c$ are:
+\begin{align*}
+	-\frac{1}{2} x_c^T \Lambda_{bb} x_c + x_c^T m = \\
+	-\frac{1}{2} (x_c - \Lambda_{bb}^{-1} m)^T \Lambda_{bb} (x_c - \Lambda_{bb}^{-1} m)
+	+\frac{1}{2} m^T \Lambda_{bb}^{-1} m
+\end{align*}
+Where $m = \Lambda_{bb} \mu_c - \Lambda_{ba} (x_d - \mu_d)$. This is again a standard quadratic form,
+and we note that the integration becomes an integral over an unnormalized Gaussian, whereby the result
+is the reciprocal of the normalization coefficient\cite[p. 88]{book}. The normalization coefficient depends
+only on the determinant of the covariance matrix, so we can integrate out $x_c$ and the only term remaining
+that depends on $x_d$ is $m$. Combined with the remaining terms from Eq~\ref{eq:2.70} that depend on $x_d$ we
+have:
+\begin{align*}
+	\frac{1}{2} & [ \Lambda_{bb} \mu_c - \Lambda_{ba} (x_d - \mu_d)]^T \Lambda_{bb}^{-1} [\Lambda_{bb} \mu_c - \Lambda_{ba}(x_d - \mu_d)] \\
+	-\frac{1}{2} & x_d^T \Lambda_{aa} x_d + x_d^T (\Lambda_{aa} \mu_d + \Lambda_{ab} \mu_c) + \text{const} \\
+	= -\frac{1}{2} & x_d^T(\Lambda_{aa} - \Lambda_{ab} \Lambda_{bb}^{-1} \Lambda_{ba}) x_d \\
+	+ & x_d^T (\Lambda_{aa} - \Lambda_{ab} \Lambda_{bb}^{-1} \Lambda_{ba})^{-1} \mu_d + \text{const}
+\end{align*}
+Where `const' is quantities independent of $x_d$. The covariance and mean of the marginal distribution $p(x_d)$ are thus
+\begin{align*}
+	\Sigma_d &= (\Lambda_{aa} - \Lambda_{ab} \Lambda_{bb}^{-1} \Lambda_{ba})^{-1} \\
+	\mu_d &= \Sigma_d (\Lambda_{aa} - \Lambda_{ab} \Lambda_{bb}^{-1} \Lambda_{ba}) \mu_d = \mu_d \quad \text{(See \cite[p.89,Eq~2.89]{book})}
+\end{align*}
+Making use of the \textit{Schur complement} again we have that
+$(\Lambda_{aa} - \Lambda_{ab} \Lambda_{bb}^{-1} \Lambda_{ba})^{-1} = \Sigma_{aa}$. Finally we have that
+$\mathbb{E}[x_d] = \mu_d$ and $\text{cov}[x_d] = \Sigma_{aa}$. Intuitively, to obtain the marginal distribution over
+a subset of multivariate normal random variables, we drop the variables we want to marginalize out from the mean
+and covariance.
+
+\pagebreak
 \section{I.4}
 \subsection{I.4.1}
 The result of our KNN implementation for different k-values and datasets is
 shown in Table \ref{tab:knn-results}. The file that generates these results is
-\texttt{kNN_run.m}, it will setup the experiment and do the classifying using
+\texttt{kNN\_run.m}, it will setup the experiment and do the classifying using
 the funktion defined in \texttt{kNN.m}.
 \begin{table}
 \begin{tabular}{|l|l|l|}
@@ -251,7 +331,7 @@ in the training set.
 
 
 \subsection{I.4.2}
-The program run for this experiment is \texttt{fivefold_val.m}, it will use aux
+The program run for this experiment is \texttt{fivefold\_val.m}, it will use aux
 functions from \texttt{kNN.m}, \texttt{shuffleSplit.m} and
 \texttt{bucketJoiner.m}. We first split the training data using the
 \texttt{shuffleSplit} function, it creates a cell-table that contains a
@@ -269,7 +349,7 @@ in the above process, the accuracy drops to $68,4\%$. This is the same accuracy
 we got from $K=5$ in the previous section.
 
 \subsection{I.4.3}
-The program used for this experiment is \texttt{fivefold_val_normalized.m} which
+The program used for this experiment is \texttt{fivefold\_val\_normalized.m} which
 is similar to the above experiment, except it also utilizes \texttt{scale.m} to
 normalize the test data.  The $(\text{mean},\text{var})$ of the training data
 is: $(3.0288,7.8218)$, the test data after the normalization have the values
