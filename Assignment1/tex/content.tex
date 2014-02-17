@@ -4,7 +4,7 @@ Given
 	a = \begin{pmatrix} 1\\2\\2 \end{pmatrix}
 	b = \begin{pmatrix} 3\\2\\1 \end{pmatrix}
 \]
-Then $a^Tb = 9$
+Then $a^Tb = 1*3 + 2*2 + 2*1 = 3 + 4 + 2 = 9$
 
 \section*{I.1.1.2}
 The \textit{l2-norm} or \textit{Euclidean norm} $||a|| = \sqrt{1^2 + 2^2 + 2^2} = 3$
@@ -13,6 +13,11 @@ The \textit{l2-norm} or \textit{Euclidean norm} $||a|| = \sqrt{1^2 + 2^2 + 2^2} 
 The outer product
 \[
 	ab^T = \begin{bmatrix}
+		1*3 & 1*2 & 1*1 \\
+		2*3 & 2*2 & 2*1 \\
+		2*3 & 2*2 & 2*1
+	       \end{bmatrix}
+	     = \begin{bmatrix}
 		3 & 2 & 1 \\
 		6 & 4 & 2 \\
 		6 & 4 & 2
@@ -20,13 +25,18 @@ The outer product
 \]
 
 \section*{I.1.1.4}
-The inverse matrix of $M$ is
+As M is a diagonal matrix the inverse matrix of $M$ is
 \[
 	M^{-1} = \begin{bmatrix}
-		1 & 0 & 0 \\
-		0 & 0.25 & 0 \\
-		0 & 0 & 0.5
-	\end{bmatrix}
+		  1/1 & 0 & 0 \\
+	  	  0 & 1/4 & 0 \\
+		  0 & 0 & 1/2
+		 \end{bmatrix}
+	       = \begin{bmatrix}
+		  1 & 0 & 0 \\
+	  	  0 & 0.25 & 0 \\
+		  0 & 0 & 0.5
+		 \end{bmatrix}
 \]
 
 \section*{I.1.1.5}
