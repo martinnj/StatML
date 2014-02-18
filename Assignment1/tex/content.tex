@@ -110,7 +110,7 @@ Therefore, differentiating for x we get:
 
 \pagebreak
 \section*{I.2.1}
-The plots with gaussian distributions for (sigma, mu) pairs (-1,1), (0,2) and
+The plots with gaussian distributions for (\mu, \sigma) pairs (-1,1), (0,2) and
 (2,3) can be seen in Figure~\ref{fig:I.2.1}. The code for generating the plots
 can be found in \texttt{unigauss\_run.m}, and the code for our gaussian
 distribution function can be found in \texttt{unigauss.m}.
@@ -118,11 +118,12 @@ distribution function can be found in \texttt{unigauss.m}.
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{img/unigauss}
 	\caption{Gaussian distributions plotted with different values for
-          (sigma, mu). \label{fig:I.2.1}}
+          (\mu, \sigma). \label{fig:I.2.1}}
 \end{figure}
 
 \section*{I.2.2}
 Source code is available in \texttt{multigauss.m} and \texttt{multigauss\_run.m}.
+Plot can be seen in Figure~\ref{fig:I.2.2}.
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{img/multigauss}
 	\caption{100 points drawn from a 2-dimensional Multivariate gaussian
@@ -130,26 +131,26 @@ Source code is available in \texttt{multigauss.m} and \texttt{multigauss\_run.m}
 \end{figure}
 
 \section*{I.2.3}
-The l2 norm of $x$ is
+The \textit{l}2 norm of $x$ is
 \begin{align*}
 	mean  &= \begin{pmatrix}1 & 2\end{pmatrix}^T \\
 	\mu   &= \begin{pmatrix}1.0006 & 1.9834\end{pmatrix}^T \\
 	||x|| &= l2(mean - \mu) = 0.0366
 \end{align*}
-where $l2()$ is a function that calculates the \textit{Euclidean norm} or l2
+where $l2()$ is a function that calculates the \textit{Euclidean norm} or \textit{l}2
 norm of the vector $mean - \mu$.
 
 Figure~\ref{fig:I.2.3} plots the points drawn along with a red circle for the
 calculated mean and a green circle for $\mu$. There is a difference between the
 two because the mean is calculated based on the generated data drawn from the
 multivariate gaussian distribution at random. If we had a number of points
-approaching infinite, the difference would approach 0.
+approaching infinite, the difference would approach $\overline{0}$.
 
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{img/multigaussmeanxy}
 	\caption{100 points drawn from a 2-dimensional Multivariate gaussian
-          distribution, plotted with the mean of the distribution and the value
-          of $\mu$. \label{fig:I.2.3}}
+          distribution, plotted with the mean of the points and of $\mu$.
+        \label{fig:I.2.3}}
 \end{figure}
 
 \FloatBarrier
