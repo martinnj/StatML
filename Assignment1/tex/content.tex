@@ -53,17 +53,17 @@ The matrix-vector product $Ma = \begin{pmatrix}
 
 \section*{I.1.1.6}
 \[
-	A = ab^T = \begin{bmatrix}
-		3 & 6 & 6 \\
-		2 & 4 & 4 \\
-		1 & 2 & 2
-	\end{bmatrix}
+	A^T = (ab^T)^T = \begin{bmatrix}
+		          3 & 6 & 6 \\
+		          2 & 4 & 4 \\
+		          1 & 2 & 2
+	                 \end{bmatrix}
 \]
 
 \section*{I.1.1.7}
 The rank of $A = 1$, because the rows are linearly dependent. We can verify this
-by observing that the third row can produce the first and second rows with a
-multiple, e.g. the first row (3 6 6) is the same as the third row (1 2 2) x 3.
+by observing that the first row can produce the second and third rows with a
+multiple, e.g. the second row (6 4 2) is the same as the first row (3 2 1) x 2.
 
 \section*{I.1.1.8}
 As $A$ is not full rank, it is not invertible.
