@@ -243,7 +243,7 @@ Let:
 now we have from chapter 2.3.2 that:
 
 \begin{align*}
-	\mathbb{E}[x_d] &= \Sigma_dd \\
+	\mathbb{E}[x_d] &= \Sigma_{dd} \\
 	&= \begin{bmatrix}
 		\Sigma_{aa} & \Sigma_{ab} \\
 		\Sigma_{ba} & \Sigma_{bb}
@@ -257,6 +257,12 @@ now we have from chapter 2.3.2 that:
 
 when $x_c$ has been marginalized out.
 
+Now we have from chapter 2.3.1 for the conditional distribution $p(x_a | x_b)$:
+
+\begin{align*}
+	\mu_{a|b} &= \mu_a + \Sigma_{ab} \Sigma_{bb}^{-1}(x_b - \mu_b)
+	\Sigma_{a|b} &= \Sigma_{aa} - \Sigma_{ab} \Sigma_{bb}^{-1} \Sigma_{ba}.
+\end{align*}
 
 HAHAHAHAHAHA
 
