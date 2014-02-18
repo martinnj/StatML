@@ -10,7 +10,11 @@ y2 = unigauss(x,0,2);
 
 % Third run
 y3 = unigauss(x,2,3);
+
+figure;
+hold on;
 plot(x,y1,x,y2,x,y3);
 title('Gaussian distributions','FontSize',15);
 grid on;
+hold off;
 legend('(-1,1)','(0,2)','(2,3)')
