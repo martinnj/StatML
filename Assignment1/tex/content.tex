@@ -112,7 +112,7 @@ Therefore, differentiating for x we get:
 \section*{I.2.1}
 The plots with gaussian distributions for $(\mu,\sigma)$ pairs $(-1,1)$, $(0,2)$ and
 $(2,3)$ can be seen in Figure~\ref{fig:I.2.1}. The code for generating the plots
-can be found in \texttt{unigauss\_run.m}, and the code for our gaussian
+can be found in \texttt{I\_2\_1.m}, and the code for our gaussian
 distribution function can be found in \texttt{unigauss.m}.
 
 \begin{figure}[h!]
@@ -122,7 +122,7 @@ distribution function can be found in \texttt{unigauss.m}.
 \end{figure}
 
 \section*{I.2.2}
-Source code is available in \texttt{multigauss.m} and \texttt{multigauss\_run.m}.
+Source code is available in \texttt{multigauss.m} and \texttt{I\_2\_2.m}.
 Plot can be seen in Figure~\ref{fig:I.2.2}.
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{img/multigauss}
@@ -144,7 +144,8 @@ Figure~\ref{fig:I.2.3} plots the points drawn along with a red circle for the
 calculated mean and a green circle for $\mu$. There is a difference between the
 two because the mean is calculated based on the generated data drawn from the
 multivariate gaussian distribution at random. If we had a number of points
-approaching infinite, the difference would approach $\overline{0}$.
+approaching infinite, the difference would approach $\overline{0}$. The source
+code for this excersize can be found in \texttt{I\_2\_3.m}.
 
 \begin{figure}[h!]
 	\includegraphics[width=\textwidth]{img/multigaussmeanxy}
@@ -170,7 +171,7 @@ gaussian distribution, plotted with the mean, $\mu$ and the two eigenvectors
 centered in the distribution $\mu$. Figure~\ref{fig:I.2.4.1.rot} shows a plot of
 the 3 rotated distributions along with the distribution rotated to match the
 largest eigenvector along the x-axis. The angle needed for this was $-37.2564^o$
-in our case. Source code is available in \texttt{multigauss.m} and \texttt{multigauss\_run.m}.
+in our case. Source code is available in \texttt{multigauss.m} and \texttt{I\_2\_4.m}.
 
 \begin{align}
 	\Sigma_{ML} &= \frac{1}{N} \sum_{n=1}^N (x_n - \mu_{ML}) (x_n - \mu_{ML})^T \notag \\
@@ -303,20 +304,25 @@ each of the five folds of a cross-validation for each given $k$ value, and then 
 best $k$ as the one with the lowest average loss:
 
 \begin{algorithmic}
-	\For{$k = 1$ to len(PossibleKValues)}
+	\For{$k$ in PossibleKValues}
 		\State $\text{subsets} \gets \text{shuffleSplit(dataset,5)}$
 		\For{$cv = 1\ to\ 5$}
 			\State $\text{test} \gets \text{subsets}[cv]$ \Comment{bucketJoiner function}
-			\State $\text{train} \gets \text{dataset} - \text{test}$ \Comment{bucketJoiner function}
+			\State $\text{train} \gets \text{subsets} - \text{test}$ \Comment{bucketJoiner function}
 			\State $\text{pred} \gets \text{kNN(k, train.X, train.y, test.X)}$
 			\State $\text{loss}[cv] \gets 1 - \frac{pred - test.y}{\text{length(pred)}}$
 		\EndFor
 		\State $\text{avgLoss}[k] \gets \text{mean(loss)}$
 	\EndFor
+	\State $\text{bestK} \gets \text{min(avgLoss)}$ \Comment{k for which avgLoss is lowest.}
 \end{algorithmic}
 
-The $k$-value with the lowest average loss for our data was $5$, with an accuracy of
-approximately $80\%$. The accuracy on the test data is $68,4\%$.
+The \texttt{shuffleSplit} method splits a dataset into $n$ randomized disjoint
+subsets, in this case $n = 5$. The \texttt{bucketJoiner} method joins one or
+more of these disjoint subsets into a single, larger subset by appending one
+onto the other. The $k$-value with the lowest average loss for our data was
+$5$, with an accuracy of approximately $80\%$. The accuracy on the test data is
+$68,4\%$.
 
 \subsection{I.4.3}
 The code for this experiment can be found in \texttt{I\_4\_3.m}. The experiment
