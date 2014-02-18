@@ -1,4 +1,5 @@
 clear all;
+hold off;
 rng(42); % Seed random generator to have consistent results.
 
 mu = [1,2]';

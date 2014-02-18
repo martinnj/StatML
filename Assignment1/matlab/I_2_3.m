@@ -1,4 +1,5 @@
 clear all;
+hold off;
 rng(42); % Seed random generator to have consistent results.
 
 mu = [1,2]';
@@ -17,6 +18,7 @@ Y = points(2,:);
 meanX = mean(X);
 meanY = mean(Y);
 muML = [meanX; meanY];
+figure;
 plot(X, Y, 'x', meanX, meanY, 'o', mu(1), mu(2), 'o');
 axis equal;
 grid on;
