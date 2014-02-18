@@ -70,11 +70,11 @@ As $A$ is not full rank, it is not invertible.
 
 \section*{I.1.2.1}
 The derivative of $f(w) = (wx + b)^2$ with respect to $w$ is
-\[
-	(wx+b)^2 = w^2 x^2 + 2wxb+b^2 = \\
-	2x^2w + 2xb = \\
-	2x(xw + b)
-\]
+\begin{align*}
+	((wx+b)^2)' &= (w^2 x^2 + 2wxb+b^2)' \\
+	&= 2x^2w + 2xb \\
+	&= 2x(xw + b)
+\end{align*}
 
 \section*{I.1.2.2}
 In general
@@ -102,7 +102,9 @@ In general
 Therefore, differentiating for x we get:
 \begin{align*}
 	f(x) &= x \\
+	f(x)' &= 1 \\
 	g(x) &= e^x \\
+	g(x)' &= e^x \\
 	\left ( f \cdot g \right )' (x) &= 1e^x + xe^x
 \end{align*}
 
