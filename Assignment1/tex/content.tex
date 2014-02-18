@@ -349,9 +349,8 @@ marginalize out from the mean and covariance.
 \section{I.4}
 \subsection{I.4.1}
 The result of our KNN implementation for different k-values and datasets is
-shown in Table \ref{tab:knn-res}. The file that generates these results is
-\texttt{kNN\_run.m}, it will setup the experiment and do the classifying using
-the funktion defined in \texttt{kNN.m}.
+shown in Table \ref{tab:knn-res}. The code to run this particular experiment
+is in \texttt{I\_4\_1.m}.
 \begin{table}
 \center
 \begin{tabular}{|l|l|l|}
@@ -370,34 +369,37 @@ Run on test data     & 5         & $68.4 \%$ \\\hline
 
 With $K=1$ and running against the training set, the accuracy is 100\% since any
 entry will be matched against itself, and only itself. We also see a general
-loss of accuracy as $K$ increases, this is because the point gets matched up
-against a larger and larger part of the total points, meaning it will become
-more likely to be classified as the type of point there is occuring most times
-in the training set.
-
+loss of accuracy as $K$ increases. This may be because the point gets matched up
+against a larger and larger set of the total points, and if there is inherent density
+clusters in the data then we risk going further and further out as K increases.
 
 \subsection{I.4.2}
-The program run for this experiment is \texttt{fivefold\_val.m}, it will use aux
-functions from \texttt{kNN.m}, \texttt{shuffleSplit.m} and
-\texttt{bucketJoiner.m}. We first split the training data using the
-\texttt{shuffleSplit} function, it creates a cell-table that contains a
-specified number of ``subsets'' that collectively is the entire training set,
-but where the indices of the data is shuffled. We then assemble these parts into
-2 sets, one that is 1/5 of the data, which will be used as a testing set, and
-one with 4/5 of the data, which is the training set.  using five different
-partitions of the data (with the above method) we used the \texttt{kNN} function
-from the previous subsection to benchmark the different $K$ values with 5
-``different training sets''.
+The code for this experiment is in \texttt{I\_4\_2.m}. It uses several auxiliary
+files found in the same directory. Given a set of possible k values `PossibleKValues'
+the following pseudocode runs cross-validation to find the average loss experienced amongst
+each of the five folds of a cross-validation for each given $k$ value, and then selects the
+best $k$ as the one with the lowest average loss:
 
-During this test, a $K$ value of $5$ gets the best accuracy, around 80\%, but
-when run against the actual training set, which have not been used or considered
-in the above process, the accuracy drops to $68,4\%$. This is the same accuracy
-we got from $K=5$ in the previous section.
+\begin{algorithmic}
+	\For{$k = 1$ to len(PossibleKValues)}
+		\State $\text{subsets} \gets \text{shuffleSplit(dataset,5)}$
+		\For{$cv = 1\ to\ 5$}
+			\State $\text{test} \gets \text{subsets}[cv]$ \Comment{bucketJoiner function}
+			\State $\text{train} \gets \text{dataset} - \text{test}$ \Comment{bucketJoiner function}
+			\State $\text{pred} \gets \text{kNN(k, train.X, train.y, test.X)}$
+			\State $\text{loss}[cv] \gets 1 - \frac{pred - test.y}{\text{length(pred)}}$
+		\EndFor
+		\State $\text{avgLoss}[k] \gets \text{mean(loss)}$
+	\EndFor
+\end{algorithmic}
+
+The $k$-value with the lowest average loss for our data was $5$, with an accuracy of
+approximately $80\%$. The accuracy on the test data is $68,4\%$.
 
 \subsection{I.4.3}
-The program used for this experiment is \texttt{fivefold\_val\_normalized.m}
-which is similar to the above experiment, except it also utilizes
-\texttt{scale.m} to normalize the test data.  The $(\text{mean},\text{var})$ of
+The code for this experiment can be found in \texttt{I\_4\_3.m}. The experiment
+is very similar to that of \texttt{I.4.4}. Before cross-validating, we normalize
+the data using the method found in \texttt{scale.m}. The $(\text{mean},\text{var})$ of
 the training data is: $(3.0288,7.8218)$, the test data after the normalization
 have the values $(0.1545,1.0000)$. The most optimal $K$ value is still 5, but
-the accuracy have increased to $71,05\%$ when using the normalized test set.
+the accuracy has increased to $71,05\%$ when using the normalized test set.
