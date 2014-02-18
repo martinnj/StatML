@@ -199,7 +199,9 @@ in our case. Source code is available in \texttt{multigauss.m} and \texttt{multi
 \FloatBarrier
 \pagebreak
 \section*{I.3}
+
 Given:
+
 \begin{align*}
 	\mu = \begin{pmatrix}
 		\mu_a \\
@@ -217,8 +219,48 @@ Given:
 		\Sigma_{ca} & \Sigma_{cb} & \Sigma_{cc}
 	\end{bmatrix}
 \end{align*}
+
 We wish to discover an expression for the conditional distribution $p(x_a|x_b)$
-in which $x_c$ has been marginalized out. We first find an expression for
+in which $x_c$ has been marginalized out.
+
+Let:
+
+\begin{align*}
+	\mu = \begin{pmatrix}
+		\mu_d \\
+		\mu_c
+	\end{pmatrix} \quad
+	x = \begin{pmatrix}
+		x_d \\
+		x_c
+	\end{pmatrix} \quad
+	\Sigma = \begin{bmatrix}
+		\Sigma_{dd} & \Sigma_{dc} \\
+		\Sigma_{dc} & \Sigma_{cc}
+	\end{bmatrix}
+\end{align*}
+
+now we have from chapter 2.3.2 that:
+
+\begin{align*}
+	\mathbb{E}\[x_d\] &= \Sigma_dd
+	&= \begin{bmatrix}
+		\Sigma_{aa} & \Sigma_{ab} \\
+		\Sigma_{ba} & \Sigma_{bb}
+	   \end{bmatrix}
+	\textrm{cov}\[x_d\] &= \mu_d
+	&= \begin{pmatrix}
+		\mu_a \\
+		\mu_b
+	   \end{pmatrix}
+\end{align*}
+
+when $x_c$ has been marginalized out.
+
+
+HAHAHAHAHAHA
+
+We first find an expression for
 $p(x_a|x_b)$ and then marginalize out $x_c$.
 
 We partition $\mu$, $x$ and $\Sigma$ as follows:
