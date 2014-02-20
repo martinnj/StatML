@@ -4,7 +4,7 @@ rng(42); % Seed random generator to have consistent results.
 mu = [1,2]';
 Sigma = [0.3,0.2;0.2,0.2];
 L = chol(Sigma,'lower');
-N=10000;
+N=100;
 points=zeros(2,N);
 for j=1:N,
     z = randn(2,1);
