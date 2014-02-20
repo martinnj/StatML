@@ -332,8 +332,20 @@ $68,4\%$.
 
 \subsection{I.4.3}
 The code for this experiment can be found in \texttt{I\_4\_3.m}. The experiment
-is very similar to that of \texttt{I.4.4}. Before cross-validating, we normalize
-the data using the method found in \texttt{scale.m}. The $(\text{mean},\text{var})$ of
-the training data is: $(3.0288,7.8218)$, the test data after the normalization
-have the values $(0.1545,1.0000)$. The most optimal $K$ value is still 5, but
-the accuracy has increased to $71,05\%$ when using the normalized test set.
+is very similar to that of \texttt{I.4.2}. Before cross-validating, we normalize
+the data using the method found in \texttt{scale.m}.
+
+The $\mu$ values for the training data is $(5.7560, 0.3017)$ and $\sigma^2 =
+(0.6958, 0.0018)$. Normalizing the training data gives $\mu = (-0.3466*1^{-14},
+-0.1823*1^{-14})$ and $\sigma^2 = (1.0000, 1.0000)$. After the normalization of
+the test data with the values found for the training data the test data have
+$\mu = (0.2073, 0.43)$ and $\sigma^2 = (1.0914, 1.2732)$. Running the test from
+\texttt{I.4.2} now gives $K_{\text{best}}=1$ and an accuracy of $78,95\%$ on the
+test data, and $100\%$ accuracy on the training data. The last result is
+expected since when $K=1$ any entry will be closest to itself (the euclidian
+distance is 0.)
+
+%The $(\text{mean},\text{var})$ of the training data is: $(3.0288,7.8218)$, the
+%test data after the normalization have the values $(0.1545,1.0000)$. The most
+%optimal $K$ value is still 5, but the accuracy has increased to $71,05\%$ when
+%using the normalized test set.
