@@ -1,5 +1,5 @@
 clear all;
-rng(42); % Seed random generator to have consistent results.
+%rng(42); % Seed random generator to have consistent results.
 
 train = dlmread('IrisTrain2014.dt');
 test = dlmread('IrisTest2014.dt');
@@ -13,14 +13,16 @@ testSize = testSize(2);
 
 trainX = train(:, 1:trainSize-1);
 testX = test(:, 1:testSize-1);
-trainMean = mean(trainX(:))
-trainVar = var(trainX(:))
+priorTrainMean = mean(trainX)
+priorTrainVar = var(trainX)
 
 % Normalize it!
 testX = scale(trainX,testX);
 trainX = scale(trainX,trainX);
-testMean = mean(testX(:))
-testVar = var(testX(:))
+trainMean = mean(trainX)
+trainVar = var(trainX)
+testMean = mean(testX)
+testVar = var(testX)
 
 % y = Target classes
 trainY = train(:, 3);
