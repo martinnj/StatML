@@ -212,8 +212,43 @@ This is the make-up assigment.
 Let:
 
 \begin{align*}
-\mathcal{N} (x|\mu_A,\sigma_A^2) &= \frac{1}{\sqrt{2\pi\sigma_A^"}} e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \\
-\mathcal{N} (x|\mu_B,\sigma_B^2) &= \frac{1}{\sqrt{2\pi\sigma_B^"}} e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}
+\mathcal{N} (x|\mu_A,\sigma_A^2) &= \frac{1}{\sqrt{2\pi\sigma_A^2}} e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \\
+\mathcal{N} (x|\mu_B,\sigma_B^2) &= \frac{1}{\sqrt{2\pi\sigma_B^2}} e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}
+\end{align*}
+
+be univariate Gaussian probability distribution functions.
+
+We look at:
+
+\begin{align*}
+f(x) $= \mathcal{N} (x|\mu_A,\sigma_A^2) \cdot \mathcal{N} (x|\mu_B,\sigma_B^2) \\
+&= \frac{1}{\sqrt{2\pi\sigma_A^2}} e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \cdot
+\frac{1}{\sqrt{2\pi\sigma_B^2}} e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}
+\end{align*}
+
+and want to show $f(x)$ is an unnormalized Gaussian distribution.
+
+As it is to be unnormalized we ignore the constants in front:
+
+\begin{align*}
+f(x) = C \cdot e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \cdot e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}.
+\end{align*}
+
+In the following we alter this expression.
+
+\begin{align*}
+e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \cdot e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}
+&= e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}
+\end{align*}
+
+We only look at the exponent.
+
+\begin{align*}
+-\frac{1}{2\sigma_A^2}(x-\mu_A)^2-\frac{1}{2\sigma_B^2}(x-\mu_B)^2 &=
+-\frac{(x-\mu_A)^2}{2\sigma_A^2}-\frac{(x-\mu_B)^2}{2\sigma_B^2} \\
+&= -\frac{2\sigma_B^2 \cdot (x-\mu_A)^2}{2\sigma_A^2 \cdot 2\sigma_B^2}
+   -\frac{2\sigma_A^2 \cdot (x-\mu_B)^2}{2\sigma_A^2 \cdot 2\sigma_B^2}\\
+&= \text{hej}
 \end{align*}
 
 \section*{Old I.3}
