@@ -285,42 +285,56 @@ C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot
 Where $C_2$ is independent of $x$. Setting:
 
 \begin{align*}
-\mu_{ab} &= \frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)}
+\mu_{AB} &= \frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)}
 \end{align*}
 
 we get:
 
 \begin{align*}
-C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{ab})^2.
+C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{AB})^2.
 \end{align*}
 
 Now we reenter the denominator.
 
 \begin{align*}
-&\phantom{\text{ = }} -\frac{C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{ab})^2}{
+&\phantom{\text{ = }} -\frac{C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{AB})^2}{
                              2\sigma_A^2 \cdot 2\sigma_B^2} \\
-&= - \frac{C_2}{2\sigma_A^2 \cdot 2\sigma_B^2} - \frac{(2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{ab})^2}{
+&= - \frac{C_2}{2\sigma_A^2 \cdot 2\sigma_B^2} - \frac{(2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{AB})^2}{
                                                       2\sigma_A^2 \cdot 2\sigma_B^2} \\
 &= C_3 - \frac{1}{2} \cdot
 \frac{1}{\frac{(2\sigma_B^2 + 2\sigma_A^2)}{2\sigma_A^2 \cdot \sigma_B^2}}
-\cdot (x - \mu_{ab})^2
+\cdot (x - \mu_{AB})^2
 \end{align*}
 
 Setting:
 
 \begin{align*}
-\sigma_{ab}^2 &= \frac{(2\sigma_B^2 + 2\sigma_A^2)}{2\sigma_A^2 \cdot \sigma_B^2}
+\sigma_{AB}^2 &= \frac{(2\sigma_B^2 + 2\sigma_A^2)}{2\sigma_A^2 \cdot \sigma_B^2}
 \end{align*}
 
 we get:
 
 \begin{align*}
-C_3 - \frac{1}{2} \cdot \frac{1}{\sigma_{ab}^2} \cdot (x - \mu_{ab})^2.
+C_3 - \frac{1}{2} \cdot \frac{1}{\sigma_{AB}^2} \cdot (x - \mu_{AB})^2.
 \end{align*}
 
 We now reenter the base $e$.
 
+\begin{align*}
+e^{C_3 - \frac{1}{2\sigma_{AB}^2} \cdot (x - \mu_{AB})^2}
+&=
+e^{C_3} \cdot e^{- \frac{1}{2\sigma_{AB}^2} \cdot (x - \mu_{AB})^2} \\
+&= C_4 \cdot e^{- \frac{1}{2\sigma_{AB}^2} \cdot (x - \mu_{AB})^2}
+\end{align*}
 
+And the ignored constant:
+
+\begin{align*}
+f(x) &= C_1 \cdot C_4 \cdot e^{- \frac{1}{2\sigma_{AB}^2} \cdot (x - \mu_{AB})^2} \\
+&= C_5 \cdot e^{- \frac{1}{2\sigma_{AB}^2} \cdot (x - \mu_{AB})^2}.
+\end{align*}
+
+And we are now on the form we want, and we can se $\mu = \mu_{AB}$ and $\sigma = \sigma_{AB}$.
 
 \section*{Old I.3}
 
