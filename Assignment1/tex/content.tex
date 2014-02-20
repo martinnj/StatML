@@ -231,7 +231,7 @@ and want to show $f(x)$ is an unnormalized Gaussian distribution.
 As it is to be unnormalized we ignore the constants in front:
 
 \begin{align*}
-f(x) = C \cdot e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \cdot e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}.
+f(x) = C_1 \cdot e^{-\frac{1}{2\sigma_A^2}(x-\mu_A)^2} \cdot e^{-\frac{1}{2\sigma_B^2}(x-\mu_B)^2}.
 \end{align*}
 
 In the following we alter this expression.
@@ -261,8 +261,66 @@ We now look at the nummerator.
 &=
 (2\sigma_B^2 + 2\sigma_A^2) \cdot x^2 +
 2\sigma_B^2 \cdot \mu_A^2 + 2\sigma_A^2 \cdot \mu_B^2 -
-(2\sigma_B^2 2\mu_A + 2\sigma_A^2 2\mu_B) \cdot x
+2 \cdot (2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B) \cdot x \\
+&=
+(2\sigma_B^2 + 2\sigma_A^2) \cdot x^2 +
+2\sigma_B^2 \cdot \mu_A^2 + 2\sigma_A^2 \cdot \mu_B^2 -
+frac{(2\sigma_B^2 + 2\sigma_A^2)}{(2\sigma_B^2 + 2\sigma_A^2)} \cdot
+2 \cdot (2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B) \cdot x \\
+&=
+(2\sigma_B^2 + 2\sigma_A^2) \cdot x^2 +
+2\sigma_B^2 \cdot \mu_A^2 + 2\sigma_A^2 \cdot \mu_B^2 -
+2 (2\sigma_B^2 + 2\sigma_A^2) \cdot
+frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)} \cdot x \\
+&=
+2\sigma_B^2 \cdot \mu_A^2 + 2\sigma_A^2 \cdot \mu_B^2 -
+\left( frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)} \right)^2 +
+(2\sigma_B^2 + 2\sigma_A^2) \cdot
+(x - frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)})^2 \\
+&=
+C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot
+(x - frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)})^2
 \end{align*}
+
+Where $C_2$ is not dependent of $x$. Setting:
+
+\begin{align*}
+\mu_{ab} &= frac{(2\sigma_B^2 \mu_A + 2\sigma_A^2 \mu_B)}{(2\sigma_B^2 + 2\sigma_A^2)}
+\end{align*}
+
+we get:
+
+\begin{align*}
+C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{ab})^2.
+\end{align*}
+
+Now we reenter the denominator.
+
+\begin{align*}
+&\phantom{\text{ = }} -\frac{C_2 + (2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{ab})^2}{
+                             2\sigma_A^2 \cdot 2\sigma_B^2} \\
+&= - frac{C_2}{2\sigma_A^2 \cdot 2\sigma_B^2} - \frac{(2\sigma_B^2 + 2\sigma_A^2) \cdot (x - \mu_{ab})^2}{
+                                                      2\sigma_A^2 \cdot 2\sigma_B^2} \\
+&= C_3 - \frac{1}{2} \cdot
+\frac{1}{\frac{(2\sigma_B^2 + 2\sigma_A^2)}{2\sigma_A^2 \cdot \sigma_B^2}}
+\cdot (x - \mu_{ab})^2
+\end{align*}
+
+Setting:
+
+\begin{align*}
+\sigma_{ab}^2 &= \frac{(2\sigma_B^2 + 2\sigma_A^2)}{2\sigma_A^2 \cdot \sigma_B^2}
+\end{align*}
+
+we get:
+
+\begin{align*}
+C_3 - \frac{1}{2} \cdot \frac{1}{\sigma_{ab}^2} \cdot (x - \mu_{ab})^2.
+\end{align*}
+
+We now reenter the base $e$.
+
+
 
 \section*{Old I.3}
 
