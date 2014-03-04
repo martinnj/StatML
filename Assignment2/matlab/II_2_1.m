@@ -19,6 +19,7 @@ pred_test3 = linearBasisFunction(test(:,1:5), wML3);
 figure;
 hold on;
 title('x and t of training set plotted with real and predicted target variables of test set.');
+legend('Training data (x,t)', 'Real targets', 'Predicted targets');
 plot(train(:,5),train(:,6),'bx', test(:,5), test(:,6), 'rx', test(:,5), pred_test2, 'gx');
 hold off;
 rmsTest1 = rootMeanSq(pred_test1, test(:,6))
