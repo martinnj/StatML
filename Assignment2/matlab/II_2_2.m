@@ -17,7 +17,7 @@ wML1 = wML(Phi1, train(:,6));
 wML2 = wML(Phi2, train(:,6));
 wML3 = wML(Phi3, train(:,6));
 
-alphaValues = -100:1:-20;
+alphaValues = 1:1:500;
 rms1 = zeros(length(alphaValues),1);
 rms2 = zeros(length(alphaValues),1);
 rms3 = zeros(length(alphaValues),1);
@@ -37,12 +37,6 @@ for i=1:length(alphaValues)
     rms2(i) = rootMeanSq( pred_test2, test(:, 6));
     rms3(i) = rootMeanSq( pred_test3, test(:, 6));
 
-    %if rms1(i) < rmsTest1
-    %    smallerAlpha1 = vertcat(smallerAlpha1,i);
-    %end
-    %if rms2(i) < rmsTest2
-    %   smallerAlpha2 = vertcat(smallerAlpha2,i); 
-    %end
     if rms3(i) < rmsTest3
        smallerAlpha3 = vertcat(smallerAlpha3,i); 
     end
@@ -50,8 +44,15 @@ end
 
 figure;
 hold on;
-plot(alphaValues, rms1, alphaValues, rms2, alphaValues, rms3);
-legend('Features 3/4', 'Feature 5', 'All features');
+alphaCount = length(alphaValues);
+title('Root Mean Square error plotted over alpha values 1 to 500');
+plot(alphaValues, rms1, 'b', alphaValues, rms2, 'g', alphaValues, rms3, 'r');
+plot(alphaValues, repmat(rmsTest1,1,alphaCount), 'm'); 
+plot(alphaValues, repmat(rmsTest2,1,alphaCount), 'y');
+plot(alphaValues, repmat(rmsTest3,1,alphaCount), 'black');
+%legend('Features 3/4', 'Feature 5', 'All features');
+legend('Features 3/4', 'Feature 5', 'All features','wML RMS for features 3/4','wML RMS for feature 5','wML RMS for all features');
 hold off;
 
 smallestRms = min(rms3)
+smallerAlpha3
