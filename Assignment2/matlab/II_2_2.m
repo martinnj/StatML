@@ -45,14 +45,46 @@ end
 figure;
 hold on;
 alphaCount = length(alphaValues);
-title('Root Mean Square error plotted over alpha values 1 to 500');
+title('Root Mean Square error plotted over alpha values 1 to 500','FontSize',20);
 plot(alphaValues, rms1, 'b', alphaValues, rms2, 'g', alphaValues, rms3, 'r');
 plot(alphaValues, repmat(rmsTest1,1,alphaCount), 'm'); 
 plot(alphaValues, repmat(rmsTest2,1,alphaCount), 'y');
 plot(alphaValues, repmat(rmsTest3,1,alphaCount), 'black');
-%legend('Features 3/4', 'Feature 5', 'All features');
 legend('Features 3/4', 'Feature 5', 'All features','wML RMS for features 3/4','wML RMS for feature 5','wML RMS for all features');
 hold off;
 
 smallestRms = min(rms3)
 smallerAlpha3
+
+alphaValues = -100:1:-20;
+rms1 = zeros(length(alphaValues),1);
+rms2 = zeros(length(alphaValues),1);
+rms3 = zeros(length(alphaValues),1);
+smallerAlpha1 = [];
+smallerAlpha2 = [];
+smallerAlpha3 = [];
+
+for i=1:length(alphaValues)
+    alpha = alphaValues(i);
+    wMAP1 = wMAP(train(:,3:4), train(:,6), Phi1, alpha, 1);
+    wMAP2 = wMAP(train(:,5), train(:,6), Phi2, alpha, 1);
+    wMAP3 = wMAP(train(:,1:5), train(:,6), Phi3, alpha, 1);
+    pred_test1 = linearBasisFunction(test(:,3:4), wMAP1);
+    pred_test2 = linearBasisFunction(test(:,5), wMAP2);
+    pred_test3 = linearBasisFunction(test(:,1:5), wMAP3);
+    rms1(i) = rootMeanSq( pred_test1, test(:, 6));
+    rms2(i) = rootMeanSq( pred_test2, test(:, 6));
+    rms3(i) = rootMeanSq( pred_test3, test(:, 6));
+
+    if rms3(i) < rmsTest3
+       smallerAlpha3 = vertcat(smallerAlpha3,i); 
+    end
+end
+
+figure;
+hold on;
+alphaCount = length(alphaValues);
+title('Root Mean Square error plotted over alpha values -100 to -20','FontSize',20);
+plot(alphaValues, rms1, 'b', alphaValues, rms2, 'g', alphaValues, rms3, 'r');
+legend('Features 3/4', 'Feature 5', 'All features');
+hold off;
