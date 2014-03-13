@@ -6,11 +6,12 @@ validate    = dlmread('sincValidate10.dt');
 
 X = vertcat(ones(1,length(train)), train(:,1)');
 y = train(:,2);
+%X_test = vertcat(ones(1,length(train)), validate(:,1)');
+%y_test = validate(:,2);
 
 K = 1;
 D = 1;
 M = 2;
-
 
 h = @(a) a/(1+abs(a));
 dh = @(a) 1/(1+abs(a))^2;
@@ -20,13 +21,19 @@ mse = @(errors) mean(errors.^2);
 [wMD,wKM] = initialWeightsNN(K, M, D);
 
 learningRate = 0.01;
-stopDifference = 0.1;
+stopDifference = 0.03;
 diffKM = 1;
 diffMD = 1;
 counter = 0;
 
 while diffKM > 0 || diffMD > 0
     counter = counter + 1;
+    if mod(counter, 50) == 0
+       counter
+       update_wKM
+       update_wMD
+       
+    end
     update_wKM = zeros(K,M+1);
     update_wMD = zeros(M+1,D+1);
     for x=1:length(X)
@@ -65,21 +72,3 @@ while diffKM > 0 || diffMD > 0
     wKM = wKM_new;
     wMD = wMD_new;
 end
-% Step 2: Calculate the output node error.
-%error = output - y
-
-% Step 3: Calculate hidden node errors.
-%hidden_errors = zeros(1,M+1);
-%for j=1:M+1
-%    v = dh(output(j));
-    % OMG WORST CODE EVER> USE A SUM, F00
-%    s = 0;
-%    for k=1:K
-%        s = s + (wKM(k,j) * output(k));
-%    end
-%    hidden_errors(j) = v*s;
-%end
-
-%wKM = wKM - hidden_errors
-%wMD = wMD - hidden_errors
-% TODO: Do something with the hidden errors!
