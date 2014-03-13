@@ -1,4 +1,4 @@
-function [ out ] = forwardProp( X, wMD, wKM, y_act, h )
+function [ out, a ] = forwardProp( x, wMD, wKM, y_act, h )
 % Invariants: 
 %   K=Number of output neurons
 %   D=Dimensionality of input samples
@@ -11,30 +11,14 @@ function [ out ] = forwardProp( X, wMD, wKM, y_act, h )
 %   wKM is a  K x M matrix
 %  
 %   The first row of wMD should be [1; 0; 0; ...; 0]
-
     K = size(wKM,1);
     M = size(wMD,1);
     D = size(wMD,2);
-    out = zeros(K,length(X));
-    
-    % For every sample
-    for x=1:length(X)
-        sample = X(:,x);
-        % For every output node
-        for k=1:K
-            z = zeros(1,M);
-            % For every hidden node
-            for j=1:M    
-                % For every input node
-                for i=1:D
-                    w_ji = wMD(j,i);
-                    z(1,j) = z(1,j) + (w_ji * sample(i)); % Update value in hidden node j
-                end
-                z(1,j) = h(z(1,j)); % Apply activation function to the hidden node j.
-            end
-            % Output node k for sample x
-            out(k,x) = y_act(sum(z));
-        end
-    end
-    out = out';
+    % Step 1: Calculate vector of hidden node values.
+    a = wMD * x;
+    % Step 2: Calculate vector of output node values, applying
+    % the activation function h() to each entry. See Eq 5.7, 5.8, 5.9 in
+    % book.
+    z = arrayfun(h, a);
+    out = wKM * z;
 end
