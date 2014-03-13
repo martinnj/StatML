@@ -22,4 +22,3 @@ trainMean = mean(trainX)
 trainVar = var(trainX)
 testMean = mean(testX)
 testVar = var(testX)
-
