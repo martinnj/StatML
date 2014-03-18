@@ -41,7 +41,7 @@ testY = test(:, testSize);
 
 %Using the best C and Gamma on preNorm
 preNormBestSigma = sqrt(1/(2*preNormBestgamma));
-preNormModel = svmtrain(trainX, trainY, 'kernel_function','rbf','rbf_sigma',preNormBestSigma,'boxconstraint',preNormBestC);
+preNormModel = svmtrain(trainX, trainY, 'kernel_function','rbf','rbf_sigma',preNormBestSigma,'boxconstraint',preNormBestC,'autoscale',false);
 
 preNormTrainPredY = svmclassify(preNormModel,trainX);
 preNormTestPredY = svmclassify(preNormModel,testX);
@@ -51,7 +51,7 @@ preNormTestAccuracy = 1 - (nnz(preNormTestPredY - testY)) / length(preNormTestPr
 
 %Using the best C and Gamma on norm
 normBestSigma = sqrt(1/(2*normBestgamma));
-normModel = svmtrain(trainX, trainY, 'kernel_function','rbf','rbf_sigma',normBestSigma,'boxconstraint',normBestC);
+normModel = svmtrain(trainX, trainY, 'kernel_function','rbf','rbf_sigma',normBestSigma,'boxconstraint',normBestC,'autoscale',false);
 
 normTrainPredY = svmclassify(normModel,trainX);
 normTestPredY = svmclassify(normModel,testX);
