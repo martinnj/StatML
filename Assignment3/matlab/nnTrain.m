@@ -21,7 +21,7 @@ function [ wMD, wKM, errors, errors_val ] = nnTrain(X, y, X_validate, y_validate
 
             % Backpropagation
             y_true = y(x);
-            [ delta_wKM, delta_wMD, round_error ] = backwardProp( y_pred, y_true, dh, a, wKM, z, sample );
+            [ delta_wMD, delta_wKM, round_error ] = backwardProp( y_pred, y_true, dh, a, wKM, z, sample );
             round_errors(1,x) = round_error;
             update_wKM = update_wKM + delta_wKM;
             update_wMD = update_wMD + delta_wMD;

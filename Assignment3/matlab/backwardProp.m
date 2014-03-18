@@ -1,4 +1,4 @@
-function [ delta_wKM, delta_wMD, round_error ] = backwardProp( y_pred, y_true, dh, a, wKM, z, sample )
+function [ delta_wMD, delta_wKM, round_error ] = backwardProp( y_pred, y_true, dh, a, wKM, z, sample )
 % Get output delta's
             y_delta = y_pred - y_true;
             round_error = y_delta^2;
