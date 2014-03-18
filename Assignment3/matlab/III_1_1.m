@@ -19,3 +19,13 @@ learningRate = 0.01;
 stopDifference = 0.03;
 
 [wMD, wKM, errors] = nnTrain(X, y, h, dh, K, M, D, learningRate, stopDifference)
+
+hold on;
+plot(X(2,:),y,'ob');
+ 
+preds = zeros(1,length(X));
+for x=1:length(X)
+    [~,~,y_pred] = forwardProp(X(:,x), h, wMD, wKM);
+    preds(1,x) =  y_pred;
+end
+plot(X(2,:),preds(1,:),'or');
