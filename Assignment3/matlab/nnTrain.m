@@ -20,20 +20,11 @@ function [ wMD, wKM, errors, errors_val ] = nnTrain(X, y, X_validate, y_validate
             [a, z, y_pred] = forwardProp(sample, h, wMD, wKM);
 
             % Backpropagation
-            % Get output delta's
-            y_delta = y_pred - y(x);
-            round_errors(1,x) = y_delta^2;
-
-            % Apply h'() to each a_j
-            a_d = arrayfun(dh, a);
-
-            % Get hidden delta's using (5.66) i.e. h'(a) * w_kj * delta_y
-            hidden_delta = a_d .* (wKM*y_delta)';
-
-            % Update wKM (See 5.67, 5.27)
-            update_wKM = update_wKM + (y_delta * z');
-            % Update wMD (See 5.67, 5.27)
-            update_wMD = update_wMD + (hidden_delta * sample');
+            y_true = y(x);
+            [ delta_wKM, delta_wMD, round_error ] = backwardProp( y_pred, y_true, dh, a, wKM, z, sample );
+            round_errors(1,x) = round_error;
+            update_wKM = update_wKM + delta_wKM;
+            update_wMD = update_wMD + delta_wMD;
         end
 
         % Calculate RMS of round

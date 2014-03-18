@@ -20,3 +20,16 @@ stopDifference = 0.03;
 
 % Compute gradients using arbitrary sample data.
 [wMD, wKM, errors_train, errors_val] = nnTrain(X, y, X_validate, y_validate, h, dh, K, M, D, learningRate, stopDifference);
+
+% Check agains something
+
+points = -10:0.05:10
+sinc = @(x) sin(x)/x
+values = arrayfun(sinc, points);
+otherValues = zeros(1,length(points));
+for x=1:length(points)
+  [~, ~, value] = forwardProp([1;x], h, wMD, wKM );
+  otherValues(1, x) = value;
+end
+
+plot(points, values, points, otherValues(1,:));
