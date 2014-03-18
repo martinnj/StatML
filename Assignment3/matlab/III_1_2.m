@@ -47,39 +47,41 @@ xlabel('Network epoch');
 ylabel('Mean-Squared Error');
 hold off;
 
-% Warning: The below use of preds and counter is ugly. Sorry!
-rates = [0.001, 0.01, 0.1, 1, 10];
+rates = [0.001, 0.01, 0.1];
 points = -10:0.05:10;
 sincvalues = arrayfun(sinc, points);
-preds = zeros(length(rates) * 2, length(points));
-for m=[2, 20]
-    counter = 0;
-    if m==20
-        counter = length(rates) + 1;
-    end
-    for l=rates
-        counter = counter + 1;
-        [wMD, wKM, errors_train, errors_val] = nnTrain(X, y, X_validate, y_validate, h, dh, K, m, D, l, stopDifference);
-        for x=1:length(points)
-           [~,~,preds(counter,x)] = forwardProp([1; points(x)], h, wMD, wKM);
-        end
+preds = zeros(length(rates), length(points));
+for i=1:length(rates)
+    rate = rates(i);
+    [wMD, wKM, errors_train, errors_val] = nnTrain(X, y, X_validate, y_validate, h, dh, K, 2, D, rate, stopDifference);
+    for x=1:length(points)
+       [~,~,preds(i,x)] = forwardProp([1; points(x)], h, wMD, wKM);
     end
 end
 
 % Plot networks vs. sinc(x) for 2 hidden nodes
 figure;
-plot(points, sincvalues,points, preds(1,:),points, preds(2,:),points, preds(3,:),points, preds(4,:),points, preds(5,:));
+plot(points, sincvalues, points, preds(1,:), points, preds(2,:), points, preds(3,:));
 hold on;
 title('Neural network with 2 hidden nodes with various learning rates');
-legend('sinc(x)','NN(2 hidden) with learning rate 0.001','NN(2 hidden) with learning rate 0.01','NN(2 hidden) with learning rate 0.1','NN(2 hidden) with learning rate 1','NN(2 hidden) with learning rate 10');
+legend('sinc(x)','NN(2 hidden) with learning rate 0.001','NN(2 hidden) with learning rate 0.01','NN(2 hidden) with learning rate 0.1');
 xlabel('-10 to 10');
 hold off;
 
+preds = zeros(length(rates), length(points));
+for i=1:length(rates)
+    rate = rates(i);
+    [wMD, wKM, errors_train, errors_val] = nnTrain(X, y, X_validate, y_validate, h, dh, K, 20, D, rate, stopDifference);
+    for x=1:length(points)
+       [~,~,preds(i,x)] = forwardProp([1; points(x)], h, wMD, wKM);
+    end
+end
+
 % Plot networks vs. sinc(x) for 20 hidden nodes
 figure;
-plot(points, sincvalues,points, preds(6,:),points, preds(7,:),points, preds(8,:),points, preds(9,:),points, preds(10,:));
+plot(points, sincvalues,points, preds(1,:),points, preds(2,:),points, preds(3,:));
 hold on;
 title('Neural network with 20 hidden nodes with various learning rates');
-legend('sinc(x)','NN(20 hidden) with learning rate 0.001','NN(20 hidden) with learning rate 0.01','NN(20 hidden) with learning rate 0.1','NN(20 hidden) with learning rate 1','NN(20 hidden) with learning rate 10');
+legend('sinc(x)','NN(20 hidden) with learning rate 0.001','NN(20 hidden) with learning rate 0.01','NN(20 hidden) with learning rate 0.1');
 xlabel('-10 to 10');
 hold off;
