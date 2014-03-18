@@ -18,7 +18,9 @@ dh = @(a) 1/(1+abs(a))^2;
 learningRate = 0.01;
 stopDifference = 0.03;
 
-[wMD, wKM, errors] = nnTrain(X, y, h, dh, K, M, D, learningRate, stopDifference)
+% Compute gradients using arbitrary sample data.
+[wMD, wKM, errors] = nnTrain(X, y, h, dh, K, M, D, learningRate, stopDifference);
+
 
 hold on;
 plot(X(2,:),y,'ob');
