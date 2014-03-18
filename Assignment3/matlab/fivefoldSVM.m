@@ -17,7 +17,7 @@ for i=1:length(Cs)
             [ltrainX, ltrainY] = bucketJoiner(shuffled, partsToJoin);
             [ltestX , ltestY ] = bucketJoiner(shuffled, (k));
             
-            model = svmtrain(ltrainX, ltrainY, 'kernel_function','rbf','rbf_sigma',sigma,'boxconstraint',C);
+            model = svmtrain(ltrainX, ltrainY, 'kernel_function','rbf','rbf_sigma',sigma,'boxconstraint',C,'autoscale',false);
             predY = svmclassify(model,ltestX);
             acc(k) = 1 - (nnz(predY - ltestY)) / length(predY);
         end
