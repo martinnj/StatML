@@ -1,4 +1,4 @@
-function [ bestC, bestgamma, finalAccuracy ] = fivefoldSVM( trainX, trainY, testX, testY, Cs, gammas )
+function [ bestC, bestgamma ] = fivefoldSVM( trainX, trainY, testX, testY, Cs, gammas )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 sigmas = arrayfun(@(gamma) sqrt(1/(2*gamma)),gammas);
@@ -28,12 +28,6 @@ end
 [row,col] = find(accs == max(accs(:)));
 bestC = Cs(row(1));
 bestgamma = gammas(col(1));
-
-model = svmtrain(trainX, trainY, 'kernel_function','rbf','rbf_sigma',sigmas(col(1)),'boxconstraint',bestC);
-predY = svmclassify(model,testX);
-finalAccuracy = 1 - (nnz(predY - testY)) / length(predY);
-
-
 
 end
 
