@@ -153,17 +153,18 @@ data.
 \section*{III.2.3.1}
 For our optimum hyper-parameters the number of free support vectors are $0$, and
 the number of bound support vectors are $54$. Changing $C$ will change the
-number of supportvectors in the model, a lower value of $C$ will result in more
-supportvectors and with more free supportvectors. This means smaller $C$ values
-gives you more supportvectors to work with, but the increase in free
-supportvectors also means that the machine is more prone to miss-classification.
+number of support vectors in the model, a lower value of $C$ will result in more
+support vectors and with more free support vectors. This means smaller $C$
+values gives you more support vectors to work with, but the increase in free
+support vectors also means that the machine is more prone to
+miss-classification.
 
 \section*{III.2.3.2}
 As the number of entries in the training data increases so does the number of
-tsupportvectors in the SVM. The amount of free vectors (for our training
-dataset) is roughly one third of the total number of support vectors and so does
-not change with the amount of training data. The increase in the number of
-supportvectors will mean the SVM takes more time to process each query
-afterwards, but will also be able to do so with greater accuracy. So much like
-the $C$ value, this becomes a trade-off, in this case between accuracy and
-speed.
+support vectors in the SVM. The amount of free vectors (for our training
+dataset) is roughly one third of the total number of support vectors and the
+ratio seems to converge as the total number of support vectors increase. The
+increase in the number of support vectors will mean the SVM takes more time to
+process each query afterwards, but will also be able to do so with greater
+accuracy. So much like the $C$ value, this becomes a trade-off, in this case
+between accuracy and speed.
