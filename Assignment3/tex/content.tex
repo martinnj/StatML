@@ -60,12 +60,29 @@ was extracted and used to train a new model that could be used for
 classification.
 
 \noindent \textit{Results:}\\
-We used the following numbers for $C$ and $\gamma$: $C = (0.01, 0.1, 1.0, 10 100
-1000 10000)$ and $\gamma = (0.0001, 0.001, 0.01, 0.1, 1, 10, 100)$. For both the
-normalized and raw data, we found that the best $C = 10$ NS $\Gamma = 0.1$
-produced the best results. The accuracy on the 
+We used the following numbers for $C$ and $\gamma$: $C = (0.01, 0.1, 1.0, 10,
+100, 1000, 10000)$ and $\gamma = (0.0001, 0.001, 0.01, 0.1, 1, 10, 100)$. For
+the raw data we found the best $C$ and $\gamma$ to be $C=0.01,
+\gamma=0.001$. For the normalized data we found $C=100, \gamma=0.1$.
+
+\begin{tabular}{l l}
+Prenormalized training data accuracy &  46.94\%\\
+Prenormalized test data accuracy     &  46.39\%\\
+Normalized training data accuracy    & 100.00\%\\
+Normalized test data accuracy        &  89.69\%\\
+\end{tabular}
 
 \noindent \textit{Discussion:}\\
+If you do not normalize your data, you will unwillingly give more importance to
+feutures wich are widely spreed, and similarly give less importeanse to dense
+data.
 
+\section*{III.2.3.1}
+For our optimum hyper-parameters the number of free support vectors are $0$, and
+the number of bound support vectors are $54$. Changing $C$ will change the
+number of supportvectors in the model, a lower value of $C$ will result in more
+supportvectors and with more free supportvectors. This means smaller $C$ values
+gives you more supportvectors to work with, but the increase in free
+supportvectors also means that the machine is more prone to miss-classification.
 
-\section*{III.2.3}
+\section*{III.2.3.2}
