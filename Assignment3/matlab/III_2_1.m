@@ -12,13 +12,13 @@ testSize  = testSize(2);
 
 trainX = train(:, 1:trainSize-1);
 testX  = test(:, 1:testSize-1);
-priorTrainMean = mean(trainX)
-priorTrainVar  = var(trainX)
+priorTrainMean = mean(trainX)'
+priorTrainVar  = var(trainX)'
 
 % Normalize it!
 testX = scale(trainX,testX);
 trainX = scale(trainX,trainX);
-trainMean = mean(trainX)
-trainVar = var(trainX)
-testMean = mean(testX)
-testVar = var(testX)
+trainMean = mean(trainX)'
+trainVar = var(trainX)'
+testMean = mean(testX)'
+testVar = var(testX)'
