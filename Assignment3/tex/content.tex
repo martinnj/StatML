@@ -1,5 +1,78 @@
 \section*{III.1.1}
+\subsection*{Derivative of $h(a)$}
+In the following we asume $a\neq0$.
+
+\begin{align*}
+  h(a) &= \frac{a}{1 + |a|} \\
+  \left(\frac{f}{g}\right)' &= \frac{f'g - g'f}{g^2} \\
+  f(a) &= a \\
+  f'(a) &= 1 \\
+  g(a) &= 1 + |a| \\
+  g^2(a) &= (1 + |a|)^2 \\
+  g'(a) &= \frac{|a|}{a} \\
+  h'(a) &= \frac{1(1 + |a|) - \frac{|a|}{a}a}{(1 + |a|)^2} \\
+        &= \frac{1 + |a| - |a|}{(1 + |a|)^2} \\
+        &= \frac{1}{(1 + |a|)^2}
+\end{align*}
+
 \section*{III.1.2}
+\subsection*{What happens for small/large learning rates?}
+The smaller the learning rate, the less you adjust weights by and thus the smaller
+steps you take during each epoch of gradient descent. Conversely, the larger the learning rate, 
+the bigger a factor weights are adjusted by and the bigger steps you take during each epoch of
+gradient descent.
+
+Beyond concerns about running time, a small learning rate may risk getting stuck in a very small
+local minimum and bigger learning rates risk bounding off past a good minimum. Selecting a good
+learning rate can thus be a case of trial and error, such as starting with a large learning rate
+to sketch out the general topology of the gradient and then switching to lower learning rates
+afterwards.
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{images/mse2.png}
+  \caption{Mean-Squared-Error across epochs, for a Neural Network with 2 hidden nodes.
+  \label{fig:mse2}}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{images/mse20.png}
+  \caption{Mean-Squared-Error across epochs, for a Neural Network with 20 hidden nodes.
+  \label{fig:mse20}}
+\end{figure}
+
+Figure~\ref{fig:mse2} and Figure~\ref{fig:mse20} show the Mean-Squared Error(MSE) of the two
+neural networks across learning epochs. In both cases we see a steady decrease in error, however
+the error of the 20-node network is significantly lower than the 2-node network. It is probable that
+our 2-node network is incapable of illustrating the kind of distribution that the data stems from,
+causing severe issues for certain data points.
+
+\subsection*{Sinc vs. Neural Network}
+Figures~\ref{fig:sinc2} and~\ref{fig:sinc20} show the \texttt{sinc(x)} function across the range
+$[-10; 10]$ alongside neural networks with 2 and 20 nodes respectively. The network with 2 nodes
+fits the data roughly like two functions of the kind $f(x)=a/(1+norm(a)$ strung together with linear
+weight coefficients. Increasing the number of nodes to 20 allows the linear combination of weights
+and inputs and activations to express a distribution closer to that of \texttt{sinc(x)}.
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{images/sinc2.png}
+  \caption{sinc(x) vs. Neural Network with 2 hidden nodes, plotted across the range [-10; 10]
+  \label{fig:sinc2}}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=\linewidth]{images/sinc20.png}
+  \caption{sinc(x) vs. Neural Network with 20 hidden nodes, plotted across the range [-10; 10]
+  \label{fig:sinc20}}
+\end{figure}
+
+\subsection*{Overfitting and early stopping}
+Overfitting occurs when a fit becomes overly complex and tied to the data being used to train with.
+One solution to overfitting is to include a regularization parameter in order to lessen the effects
+of overfitting. Another solution is to perform early stopping: when training an optimization algorithm,
+the error measured with respect to independent data (such as a validation set) often shows a decrease
+at first, followed by an increase. We can stop at the point where the error on the validation set
+increases, in order to obtain a network that hopefully has better generalization performance than had
+we continued.
 
 \section*{III.2.1}
 \textbf{Mean/variuance of the training data}\\
