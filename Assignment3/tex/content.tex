@@ -66,10 +66,10 @@ the raw data we found the best $C$ and $\gamma$ to be $C=0.01,
 \gamma=0.001$. For the normalized data we found $C=100, \gamma=0.1$.
 
 \begin{tabular}{l l}
-Prenormalized training data accuracy &  46.94\%\\
-Prenormalized test data accuracy     &  46.39\%\\
-Normalized training data accuracy    & 100.00\%\\
-Normalized test data accuracy        &  89.69\%\\
+Prenormalized training data accuracy & $ 46.94\%$\\
+Prenormalized test data accuracy     & $ 46.39\%$\\
+Normalized training data accuracy    & $100.00\%$\\
+Normalized test data accuracy        & $ 89.69\%$\\
 \end{tabular}
 
 \noindent \textit{Discussion:}\\
@@ -86,3 +86,11 @@ gives you more supportvectors to work with, but the increase in free
 supportvectors also means that the machine is more prone to miss-classification.
 
 \section*{III.2.3.2}
+As the number of entries in the training data increases so does the number of
+tsupportvectors in the SVM. The amount of free vectors (for our training
+dataset) is roughly one third of the total number of support vectors and so does
+not change with the amount of training data. The increase in the number of
+supportvectors will mean the SVM takes more time to process each query
+afterwards, but will also be able to do so with greater accuracy. So much like
+the $C$ value, this becomes a trade-off, in this case between accuracy and
+speed.
