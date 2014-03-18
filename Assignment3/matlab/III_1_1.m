@@ -18,10 +18,8 @@ dh = @(a) 1/(1+abs(a))^2;
 learningRate = 0.01;
 stopDifference = 0.03;
 
-% Compute gradients using arbitrary sample data.
-%[wMD, wKM, errors_train, errors_val] = nnTrain(X, y, X_validate, y_validate, h, dh, K, M, D, learningRate, stopDifference);
 
-% Check agains something
+% Verification of gradients
 [wMD, wKM] = initialWeightsNN(K,M,D);
 update_wKM = zeros(K,M+1);
 update_wMD = zeros(M+1,D+1);
