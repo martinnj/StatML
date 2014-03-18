@@ -113,14 +113,12 @@ priorTrainMean & priorTrainVar & trainMean & trainVar & testMean & testVar \\\hl
 \section*{III.2.2}
 
 \textit{Description of the software used:}\\
-We used LibSVM for
-Matlab\footnote{\url{http://www.csie.ntu.edu.tw/\~cjlin/libsvm/\#matlab}}.
+We have used Matlabs own SVM implementation.
 Training the SVM produces a model structure, this is done like so:
 \begin{verbatim}
 model = svmtrain(trainX, trainY, 'kernel_function','rbf',
-                 'rbf_sigma',sigmas,'boxconstraint',C);
+                 'rbf_sigma',sigmas,'boxconstraint',C,'autoscale',false);
 \end{verbatim}
-
 
 \begin{tabular}{|l l|}
 \hline
@@ -128,7 +126,8 @@ trainX                      & Training data features.\\
 trainY                      & Corresponding training data classes.\\
 'kernel\_function' \& 'rbf' & Sets the kernel function to be a gaussian kernel function.\\
 'rbf\_sigma' \& sigmas      & Lets us specify a $\sigma = \sqrt{1/(2\gamma)}$.\\
-'boxconstraint' \& C        & Lets us specify regularization paramter.\\\hline
+'boxconstraint' \& C        & Lets us specify regularization paramter.\\
+'autoscale' \& false        & Prevents libSVM from normalizing the data itself, as we do that.\\\hline
 \end{tabular}
 
 \noindent \textit{Our process:}\\
